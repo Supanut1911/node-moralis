@@ -15,4 +15,11 @@ router.get("/getETHprice", async (req: Request, res: Response) => {
   return res.json(response);
 });
 
+router.get("/getTxAddress", async (req: Request, res: Response) => {
+  let { address } = req.query;
+  address = address as string;
+  const response = await walletService.getTxAddress(address);
+  return res.json(response);
+});
+
 export default router;

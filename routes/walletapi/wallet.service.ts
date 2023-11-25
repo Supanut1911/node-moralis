@@ -13,6 +13,20 @@ class WalletService {
       return error;
     }
   }
+
+  public async getTxAddress(address: string) {
+    try {
+      const chain = "0x1";
+      const response =
+        await Moralis.EvmApi.transaction.getWalletTransactionsVerbose({
+          address,
+          chain,
+        });
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default WalletService;
