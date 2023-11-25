@@ -1,63 +1,19 @@
 import express, { Request, Response } from "express";
 import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
 import "dotenv/config";
 import cors from "cors";
 import walletRoute from "./routes/walletapi/wallet.route";
-
+import nftRoute from "./routes/NFTapi/nft.route";
 const app = express();
 
 app.use(cors());
 const port: number = 4000;
 
-app.use("/api", walletRoute);
+app.use("/api/wallet", walletRoute);
+app.use("/api/nft", nftRoute);
 
 // Add a variable for the api key, address, and chain
 const MORALIS_API_KEY: string = `${process.env.MORALIS_API_KEY}`;
-
-//
-app.get("nft-owner-by-tokenid", async (req: Request, res: Response) => {
-  let { address, chainInput } = req.query;
-  address = address as string;
-  let chain: EvmChain;
-  switch (chainInput) {
-    case "sepolia":
-      chain = EvmChain.SEPOLIA;
-      break;
-    case "mumbai":
-      chain = EvmChain.MUMBAI;
-      break;
-    default:
-      chain = EvmChain.SEPOLIA;
-  }
-  const tokenId = "0";
-
-  try {
-    const response = await Moralis.EvmApi.nft.getNFTTokenIdOwners({
-      address,
-      chain,
-      tokenId,
-    });
-    return res.json(response);
-  } catch (error) {
-    console.log("error => ", error);
-  }
-});
-
-const getChain = (chainName: string): EvmChain => {
-  let chain: EvmChain;
-  switch (chainName) {
-    case "sepolia":
-      chain = EvmChain.SEPOLIA;
-      break;
-    case "mumbai":
-      chain = EvmChain.MUMBAI;
-      break;
-    default:
-      chain = EvmChain.SEPOLIA;
-  }
-  return chain;
-};
 
 app.get("/nft-owner-by-collection", async (req: Request, res: Response) => {
   let { address, chainInput, ownerAddress } = req.query;
