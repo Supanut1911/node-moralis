@@ -1,9 +1,6 @@
-// src/routes/userRoutes.ts
-
 import express, { Request, Response } from "express";
 import WalletService from "./wallet.service";
 
-import getChain from "../../utils/useGetchain";
 const router = express.Router();
 const walletService = new WalletService();
 

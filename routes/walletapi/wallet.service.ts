@@ -1,5 +1,4 @@
 import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
 import getChain from "../../utils/useGetchain";
 class WalletService {
   public async getETHprice(walletAddress: string, chainInput: string) {
