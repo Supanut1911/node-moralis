@@ -10,7 +10,7 @@ const getChain = (chainName: string): EvmChain => {
       chain = EvmChain.MUMBAI;
       break;
     default:
-      chain = EvmChain.SEPOLIA;
+      chain = EvmChain.ETHEREUM;
   }
   return chain;
 };
